@@ -1,4 +1,8 @@
-export const UNIT: Record<string, number> = {
+export const A_UNIT: Record<string, number> = {
+  a: 1,
+};
+
+export const getUnitMap = (includeA: boolean): Record<string, number> => ({
   zero: 0,
   first: 1,
   one: 1,
@@ -38,8 +42,8 @@ export const UNIT: Record<string, number> = {
   eleven: 11,
   twelfth: 12,
   twelve: 12,
-  a: 1,
-};
+  ...(includeA ? A_UNIT : {}),
+});
 
 export const TEN: Record<string, number> = {
   twenty: 20,
@@ -76,17 +80,22 @@ export const MAGNITUDE: Record<string, number> = {
   decillion: 1_000_000_000_000_000_000_000_000_000_000_000,
 };
 
-export const NUMBER: Record<string, number> = {
-  ...UNIT,
+export const getNumberMap = (includeA: boolean): Record<string, number> => ({
+  ...getUnitMap(includeA),
   ...TEN,
   ...MAGNITUDE,
-};
+});
 
-export const UNIT_KEYS = Object.keys(UNIT);
+export const getUnitKeys = (includeA: boolean) =>
+  Object.keys(getUnitMap(includeA));
 export const TEN_KEYS = Object.keys(TEN);
 export const MAGNITUDE_KEYS = Object.keys(MAGNITUDE);
 
-export const NUMBER_WORDS = [...UNIT_KEYS, ...TEN_KEYS, ...MAGNITUDE_KEYS];
+export const getNumberWords = (includeA: boolean): string[] => [
+  ...getUnitKeys(includeA),
+  ...TEN_KEYS,
+  ...MAGNITUDE_KEYS,
+];
 
 export const JOINERS = ["and"];
 export const DECIMALS = ["point", "dot"];
@@ -117,6 +126,10 @@ export const PUNCTUATION = [
   " ",
 ];
 
-export const ALL_WORDS = [...NUMBER_WORDS, ...JOINERS, ...DECIMALS];
+export const getAllWords = (includeA: boolean): string[] => [
+  ...getNumberWords(includeA),
+  ...JOINERS,
+  ...DECIMALS,
+];
 
 export const BLACKLIST_SINGULAR_WORDS = ["a"];

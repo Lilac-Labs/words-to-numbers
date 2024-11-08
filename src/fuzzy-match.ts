@@ -1,13 +1,17 @@
 import { jaroWinkler } from "@skyra/jaro-winkler";
-import { ALL_WORDS } from "./constants";
+import { getAllWords } from "./constants";
+import type { WordsToNumbersOptions } from "./types";
 
 type FuzzyMatch = {
   word: string;
   score: number;
 };
 
-const fuzzyMatch = (word: string): string => {
-  const allMatches = ALL_WORDS.map<FuzzyMatch>((numberWord) => ({
+const fuzzyMatch = (
+  word: string,
+  { includeA = true }: WordsToNumbersOptions
+): string => {
+  const allMatches = getAllWords(includeA).map<FuzzyMatch>((numberWord) => ({
     word: numberWord,
     score: jaroWinkler(numberWord, word),
   }));

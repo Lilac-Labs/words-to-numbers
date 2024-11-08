@@ -17,10 +17,6 @@ import wtn from "./index";
 //   expect(wtn("twenty-one thousand five hundred seventy-six")).to.equal(21576);
 // });
 
-// it("a crab cake", () => {
-//   expect(wtn("a crab cake")).to.equal("a crab cake");
-// });
-
 /**
  * Failed after conversion to TypeScript (without any other changes)
  *
@@ -342,6 +338,14 @@ it("seventeen dot two four dot twelve dot five", () => {
   expect(wtn("seventeen dot two four dot twelve dot five")).to.eq(
     "17.24 dot 12.5"
   );
+});
+
+it("1 crab cake", () => {
+  expect(wtn("a crab cake")).to.equal("1 crab cake");
+});
+
+it("a crab cake", () => {
+  expect(wtn("a crab cake", { includeA: false })).to.equal("a crab cake");
 });
 
 // these dont work below fml

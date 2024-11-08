@@ -14,7 +14,7 @@ export const wordsToNumbers = (
     return text;
   }
 
-  return compiler({ text, regions });
+  return compiler({ text, regions, options });
 };
 
 export default wordsToNumbers;

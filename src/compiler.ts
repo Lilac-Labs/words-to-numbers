@@ -1,8 +1,18 @@
-import { NUMBER } from "./constants";
-import { TokenType, type Region, type SubRegion } from "./types";
+import { getNumberMap } from "./constants";
+import {
+  type WordsToNumbersOptions,
+  TokenType,
+  type Region,
+  type SubRegion,
+} from "./types";
 import { splice } from "./util";
 
-const getNumber = (region: Region): number => {
+const getNumber = (
+  region: Region,
+  { includeA = true }: WordsToNumbersOptions
+): number => {
+  const NUMBER = getNumberMap(includeA);
+
   let sum = 0;
   let decimalReached = false;
   const decimalUnits: SubRegion[] = [];
@@ -95,12 +105,16 @@ const getNumber = (region: Region): number => {
   return sum;
 };
 
-const replaceRegionsInText = (regions: Region[], text: string): string => {
+const replaceRegionsInText = (
+  regions: Region[],
+  text: string,
+  opts: WordsToNumbersOptions
+): string => {
   let replaced = text;
   let offset = 0;
   regions.forEach((region) => {
     const length = region.end - region.start + 1;
-    const replaceWith = getNumber(region).toString();
+    const replaceWith = getNumber(region, opts).toString();
     replaced = splice(replaced, region.start + offset, length, replaceWith);
     offset -= length - replaceWith.length;
   });
@@ -110,14 +124,19 @@ const replaceRegionsInText = (regions: Region[], text: string): string => {
 interface CompilerParams {
   regions: Region[];
   text: string;
+  options: WordsToNumbersOptions;
 }
 
-const compiler = ({ regions, text }: CompilerParams): string | number => {
+const compiler = ({
+  regions,
+  text,
+  options,
+}: CompilerParams): string | number => {
   if (regions[0].end - regions[0].start === text.length - 1) {
-    return getNumber(regions[0]);
+    return getNumber(regions[0], options);
   }
 
-  return replaceRegionsInText(regions, text);
+  return replaceRegionsInText(regions, text, options);
 };
 
 export default compiler;

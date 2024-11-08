@@ -1,13 +1,13 @@
 import {
   BLACKLIST_SINGULAR_WORDS,
   DECIMALS,
+  getNumberMap,
+  getNumberWords,
+  getUnitKeys,
   JOINERS,
   MAGNITUDE_KEYS,
-  NUMBER,
-  NUMBER_WORDS,
   PUNCTUATION,
   TEN_KEYS,
-  UNIT_KEYS,
 } from "./constants";
 import fuzzyMatch from "./fuzzy-match";
 import { TokenType } from "./types";
@@ -105,10 +105,16 @@ const canAddTokenToEndOfSubRegion = (
   return false;
 };
 
-const getSubRegionType = (subRegion: SubRegion | null, currentToken: Token) => {
+const getSubRegionType = (
+  subRegion: SubRegion | null,
+  currentToken: Token,
+  { includeA = true }: WordsToNumbersOptions
+) => {
   if (!subRegion) {
     return { type: currentToken.type, isHundred: false };
   }
+
+  const NUMBER = getNumberMap(includeA);
 
   const prevToken = subRegion.tokens[0];
   const isHundred =
@@ -140,7 +146,7 @@ const checkIfTokenFitsSubRegion = (
   token: Token,
   options: WordsToNumbersOptions
 ) => {
-  const { type, isHundred } = getSubRegionType(subRegion, token);
+  const { type, isHundred } = getSubRegionType(subRegion, token, options);
 
   if (!subRegion) {
     return { action: Action.START_NEW_REGION, type, isHundred };
@@ -253,6 +259,7 @@ const checkIfTokenFitsRegion = (
     return Action.ADD;
   }
 
+  const NUMBER_WORDS = getNumberWords(options.includeA ?? true);
   const isNumberWord = NUMBER_WORDS.includes(token.lowerCaseValue);
   if (isNumberWord) {
     if (!region) {
@@ -336,7 +343,11 @@ const matchRegions = (
   }));
 };
 
-const getTokenType = (chunk: string): TokenType | undefined => {
+const getTokenType = (
+  chunk: string,
+  { includeA = true }: WordsToNumbersOptions
+): TokenType | undefined => {
+  const UNIT_KEYS = getUnitKeys(includeA);
   if (UNIT_KEYS.includes(chunk.toLowerCase())) {
     return TokenType.UNIT;
   }
@@ -362,7 +373,7 @@ const parser = (text: string, options: WordsToNumbersOptions): Region[] => {
     .reduce<Token[]>((acc, chunk) => {
       const unfuzzyChunk =
         chunk.length && options.fuzzy && !PUNCTUATION.includes(chunk)
-          ? fuzzyMatch(chunk)
+          ? fuzzyMatch(chunk, options)
           : chunk;
 
       const start = acc.length ? acc[acc.length - 1].end + 1 : 0;
@@ -374,7 +385,7 @@ const parser = (text: string, options: WordsToNumbersOptions): Region[] => {
           end: end - 1,
           value: unfuzzyChunk,
           lowerCaseValue: unfuzzyChunk.toLowerCase(),
-          type: getTokenType(unfuzzyChunk),
+          type: getTokenType(unfuzzyChunk, options),
         });
       }
 

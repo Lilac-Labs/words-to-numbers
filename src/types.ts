@@ -1,6 +1,7 @@
 export interface WordsToNumbersOptions {
   fuzzy?: boolean;
   impliedHundreds?: boolean;
+  includeA?: boolean;
 }
 
 export enum TokenType {
