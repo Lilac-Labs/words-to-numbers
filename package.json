@@ -1,5 +1,5 @@
 {
-  "name": "lilac-labs/words-to-numbers",
+  "name": "@lilac-labs/words-to-numbers",
   "version": "2.1.4",
   "description": "Convert textual words to numbers with optional fuzzy text matching",
   "license": "MIT",
