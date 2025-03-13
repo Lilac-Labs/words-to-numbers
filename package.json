@@ -1,12 +1,11 @@
 {
-  "name": "@insomnia-dev/words-to-numbers",
-  "version": "2.1.3",
+  "name": "lilac-labs/words-to-numbers",
+  "version": "2.1.4",
   "description": "Convert textual words to numbers with optional fuzzy text matching",
   "license": "MIT",
-  "author": "Chris Sandvik <chris.sandvik@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/insomnia-dev/words-to-numbers.git"
+    "url": "https://github.com/Lilac-Labs/words-to-numbers.git"
   },
   "type": "module",
   "exports": {
