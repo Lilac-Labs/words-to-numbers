@@ -29,6 +29,13 @@ replaced.
 
 TODO: Add functionality for parsing mixed numbers and words. PRs welcome.
 
+## Publish
+
+```
+npm run build
+npm publish
+```
+
 ## Basic Examples
 
 ```ts
