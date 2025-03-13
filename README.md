@@ -1,8 +1,8 @@
 # Words To Numbers
 
 This repository was forked from
-[words-from-numbers](https://github.com/finnfiddle/words-to-numbers) because the
-project seems abandoned.
+[words-from-numbers](https://github.com/insomnia-dev/words-to-numbers) because
+the project seems abandoned.
 
 The codebase was modernized and published under 2.0 with the following changes:
 
@@ -20,7 +20,7 @@ The codebase was modernized and published under 2.0 with the following changes:
 ## Usage
 
 ```
-npm install @insomnia-dev/words-to-numbers
+npm install @lilac-labs/words-to-numbers
 ```
 
 If the whole string passed is a number then it will return a `Number` type
