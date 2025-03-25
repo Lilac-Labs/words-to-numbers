@@ -74,7 +74,7 @@ to find the best match for the number words. Don't rely on this being completely
 accurate...
 
 ```ts
-import wordsToNumbers from "@insomnia-dev/words-to-numbers";
+import wordsToNumbers from "@lilac-labs/words-to-numbers";
 
 wordsToNumbers("won huntred", { fuzzy: true }); //100
 wordsToNumbers("too thousant and fiev", { fuzzy: true }); //2005
@@ -93,7 +93,7 @@ wordsToNumbers("three point one four one five nine two six"); //3.1415926
 ## Ordinal Numbers
 
 ```ts
-import wordsToNumbers from "@insomnia-dev/words-to-numbers";
+import wordsToNumbers from "@lilac-labs/words-to-numbers";
 
 wordsToNumbers("first"); //1
 wordsToNumbers("second"); //2
