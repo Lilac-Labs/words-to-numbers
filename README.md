@@ -39,7 +39,7 @@ npm publish
 ## Basic Examples
 
 ```ts
-import wordsToNumbers from "@insomnia-dev/words-to-numbers";
+import wordsToNumbers from "@lilac-labs/words-to-numbers";
 
 wordsToNumbers("one hundred"); //100
 wordsToNumbers("one hundred and five"); //105
