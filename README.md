@@ -84,7 +84,7 @@ wordsToNumbers("tree millyon sefen hunderd and twinty sex", { fuzzy: true }); //
 ## Decimal Points
 
 ```ts
-import wordsToNumbers from "@insomnia-dev/words-to-numbers";
+import wordsToNumbers from "@lilac-labs/words-to-numbers";
 
 wordsToNumbers("ten point five"); //10.5
 wordsToNumbers("three point one four one five nine two six"); //3.1415926
