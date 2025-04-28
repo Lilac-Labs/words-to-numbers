@@ -2,7 +2,6 @@ export const UNIT: Record<string, number> = {
   zero: 0,
   first: 1,
   one: 1,
-  second: 2,
   two: 2,
   third: 3,
   thirteenth: 13,

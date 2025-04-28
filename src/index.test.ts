@@ -194,7 +194,7 @@ it("first", () => {
 });
 
 it("second", () => {
-  expect(wtn("second")).to.equal(2);
+  expect(wtn("second")).to.equal("second");
 });
 
 it("third", () => {
@@ -226,7 +226,7 @@ it("sixtieth", () => {
 });
 
 it("seventy second", () => {
-  expect(wtn("seventy second")).to.equal(72);
+  expect(wtn("seventy second")).to.equal("70 second");
 });
 
 it("eighty ninth", () => {
